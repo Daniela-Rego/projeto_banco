@@ -24,6 +24,7 @@ describe('teste conta', () => {
       new Conta(menorIdade);
     }).toThrow(Error);
   });
+
   it('valida se o numero da conta não é zero', () => {
     const contaOk = {
       cliente: 'Daniela',
@@ -36,6 +37,7 @@ describe('teste conta', () => {
       return new Conta(contaOk);
     }).toThrow();
   });
+
   /* it("se o numero da conta for zero derá um erro",()=>{
         const contaOk ={
             cliente: "Daniela",
