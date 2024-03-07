@@ -1,0 +1,41 @@
+//Ctrl + Shift + P (restart)
+debito,credito,transferencia
+minha conta precisa ter um saldo
+pegar as operações de conta(extrato da conta)
+saber se a operação é deposito ou saque
+Eu tenho uma transferencia para fazer, preciso pegar o saldo de uma conta e passar para a outra
+
+-------
+Duvidas:
+1:  a create-transfer pode ter mais de um metodo?
+2: devo gerar o id dentro da entidade transfer?
+4: na create-transfer só podemos ter o metodo execute?
+5: tentei criar uma propridedade saldo dentro da interface mas nao consegui acessar
+ Conta {                                                                                                                                                                                  
+      
+      props: { cliente: 'Dani', idade: 21, numero_conta: 2,saldo: 1000, }
+    }
+
+
+
+
+como funciona o @Mixin("Conta") ?
+
+
+
+Quero fazer uma transferencia:
+verificar se a conta do sender tem saldo
+estudar sobre mocks e arrays, pq preciso dar um update nos valores do saldo
+Verificar se a conta existe -ok
+tenho que diminuir o saldo do sender -ok
+tenho que aumentar o saldo do recived - ok
+
+
+var diaDaSemana = data.weekday;
+
+  // O "weekday" de uma instancia de data retorna um
+  // inteiro referente ao dia da semana. Sábado e domingo
+  // são representados respectivamente por 6 e 7.
+
+
+  
