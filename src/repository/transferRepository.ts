@@ -1,7 +1,7 @@
-import { Transfer } from "../entities/transferencia";
-
+import { Transfer } from '../entities/transferencia';
+import { INewTransfer } from '../interfaces/transfer.type';
 
 export interface TransferRepository {
-    save(transfer:Transfer): Promise<void>;
-    findById(id:any):Promise<Transfer>;
+  save(transfer: INewTransfer): Promise<Transfer>;
+  findById(id: any): Promise<Transfer>;
 }

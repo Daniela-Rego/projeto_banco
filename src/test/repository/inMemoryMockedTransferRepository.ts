@@ -1,13 +1,13 @@
 import { Transfer } from '../../entities/transferencia';
 import { INewTransfer } from '../../interfaces/transfer.type';
-import { TransferRepository } from '../transferRepository';
+import { TransferRepository } from '../../repository/transferRepository';
 import { v4 as uuidv4 } from 'uuid';
 
-export class InMemoryTransferRepository implements TransferRepository {
+export class InMemoryMockedTransferRepository implements TransferRepository {
   private transfers: Transfer[] = [];
 
   async save(transfer: INewTransfer) {
-    const date = new Date();
+    const date = new Date('2024-03-03');
     const id = uuidv4();
 
     const newTransfer = new Transfer({

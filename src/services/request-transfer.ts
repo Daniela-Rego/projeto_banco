@@ -1,41 +1,63 @@
-import { Transfer } from "../entities/transferencia"
-import { TransferRepository } from "../repository/transferRepository";
-import { ContaRepository } from "../repository/contaRepository";
-
-//Duvida, devo usar o type mesmo ?
-type TransferExecute = {
-    novoSaldoReived:number,
-    novoSaldoSender: number
-}
+import { Transfer } from '../entities/transferencia';
+import { TransferRepository } from '../repository/transferRepository';
+import { ContaRepository } from '../repository/contaRepository';
 
 export class RequestTransfer {
-    constructor( public repositoryTransfer: TransferRepository,public repositoryConta: ContaRepository) { }
+  constructor(
+    public repositoryTransfer: TransferRepository,
+    public repositoryConta: ContaRepository
+  ) {}
 
-    
-    async executeTransfer(transfer, saldoSender, saldoRecived): Promise<TransferExecute> {
-        //tenho que pegar o saldo das duas contas passar para fazer a diminuição do saldo entre as contas
-        const transferEncontrada = await this.repositoryTransfer.findById(transfer.params.id);
-        if(!transferEncontrada){
-            throw new Error("Requisição de transferencia nao encontrada")
-        }
-        let transferExecute: TransferExecute;
-        transferExecute = await this.transferRequest(transfer.valueTransfer, saldoSender, saldoRecived);
-        console.log('transferExecute existe? no requestTransfer ', transferExecute)
-       
-       
+  async executeTransfer(
+    transfer,
+    saldoSender,
+    saldoRecived
+  ): Promise<Transfer> {
+    const transferEncontrada = await this.repositoryTransfer.findById(
+      transfer.params.id
+    );
 
-        return transferExecute;
-
-    }
-    async transferRequest(valueTransfer, saldoSender, saldoRecived) {
-        console.log("entrei V2,", saldoSender, saldoRecived);
-
-        const novoSaldoReived = saldoRecived + valueTransfer;
-        const novoSaldoSender = saldoSender - valueTransfer;
-
-        return { novoSaldoReived, novoSaldoSender };
-
-
+    if (!transferEncontrada) {
+      throw new Error('Requisição de transferencia nao encontrada');
     }
 
+    this.verifyIfWeekeend(transferEncontrada.created_at);
+
+    const novoSaldoReived =
+      saldoRecived + Number(transferEncontrada.valueTransfer);
+    const novoSaldoSender =
+      saldoSender - Number(transferEncontrada.valueTransfer);
+
+    await this.repositoryConta.update(
+      transferEncontrada.numberAccountRecived,
+      novoSaldoSender
+    );
+
+    await this.repositoryConta.update(
+      transferEncontrada.numberAccountRecived,
+      novoSaldoReived
+    );
+
+    return transferEncontrada;
+  }
+
+  async verifyIfWeekeend(date: Date) {
+    const dayOfWeek = date.getDay();
+
+    if (dayOfWeek == 5 || dayOfWeek == 6) {
+      throw new Error(
+        'Não é possível realizar transferencia no final de semana'
+      );
+    }
+  }
+
+  //duvida devo colocar que o date é do tipo data?
+  //duvida por que sou obrigada a retornar uma promessa de boleano ?
+  /* async function validaFeriado(date) {
+
+            const url='https://brasilapi.com.br/api/feriados/v1/2024';
+            const listaFeriados = await axios.get(url);
+            console.log('listaFeriados::',listaFeriados)
+            console.log("typeof de listaFeriados:::>>",typeof(listaFeriados));
+        } */
 }
