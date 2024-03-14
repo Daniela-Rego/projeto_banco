@@ -20,8 +20,7 @@ describe('testando a criação de uma classe', () => {
     );
     createTransfer = new CreateTransfer(
       transferRepositoryInMory,
-      contaRepository,
-      requestTransfer
+      contaRepository
     );
 
     const createContaBodyTest = {

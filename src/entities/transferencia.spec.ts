@@ -12,7 +12,9 @@ describe("testando a entitie Tranferencia",()=>{
             
             numberAccountSender:1,
             numberAccountRecived:2,
-            valueTransfer:15
+            valueTransfer:15,
+            created_at: new Date(),
+            id: "12s"
         }
         const response = new Transfer(request);
         console.log("testeee",response);
@@ -22,7 +24,9 @@ describe("testando a entitie Tranferencia",()=>{
         const request = {
             numberAccountSender:0,
             numberAccountRecived:2,
-            valueTransfer:15
+            valueTransfer:15,
+            created_at: new Date(),
+            id: "12s"
         }
        
         
