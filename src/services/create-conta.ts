@@ -21,7 +21,7 @@ export class CreateConta {
     async execute(contaRequest:CreatContaRequest): Promise<CreatContaResponse>{
         console.log('contaRequest_body',contaRequest);
         const createConta = new Conta(contaRequest);
-        const contaExiste = await this.repository.procurar(createConta.numero_conta);
+        const contaExiste = await this.repository.findAccount(createConta.numero_conta);
        console.log('contaExiste no execute conta',contaExiste);
         if( contaExiste){
             throw new Error('Numero de conta ja existe');
