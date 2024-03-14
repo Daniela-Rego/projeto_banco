@@ -2,6 +2,6 @@ import { Transfer } from "../entities/transferencia";
 
 
 export interface TransferRepository {
-    save(transfer:Transfer): Promise<void>;
+    save(transfer:INewTransfer): Promise<Transfer>;
     findById(id:any): Promise<Transfer>;
 }

@@ -9,7 +9,7 @@ export class ContaRepositoryInMemory implements ContaRepository{
        console.log('insertArray repository: ',insertArray);
        console.log('depois do insert: ',this.contas);
      }
-     async procurar(numeroConta:Number): Promise<Conta| undefined>{
+     async findAccount(numeroConta:Number): Promise<Conta| undefined>{
         console.log('entrou em procurar conta',numeroConta);
         console.log("this.contas procurar conta",this.contas)
        
@@ -22,11 +22,27 @@ export class ContaRepositoryInMemory implements ContaRepository{
 
         return contaEncontrada;
      }
-    async update(account:Conta,novoSaldo:number): Promise<Conta> {
-      account.saldo = novoSaldo;
-      console.log(' accountdepois da transferencia', account);
-      return account;
-    
-     }
+     async update(accountId: number, novoSaldo: number): Promise<Conta> {
+      // Change Saldo
+      let changedAcount;
+  
+      // Update on array
+      this.contas = this.contas.map((item) => {
+        if (item.numero_conta === accountId) {
+          item.saldo = novoSaldo;
+          changedAcount = item;
+          return item;
+        }
+  
+        return item;
+      });
+  
+      if (!changedAcount) {
+        throw new Error('Conta não encontrada');
+      }
+  
+      // Return account
+      return changedAcount;
+    }
 }
 

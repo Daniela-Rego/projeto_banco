@@ -1,3 +1,5 @@
+
+//interface da transferência
 export interface ITransfer {
     numberAccountSender: number;
     numberAccountRecived: number;
@@ -6,7 +8,8 @@ export interface ITransfer {
     id: string;
   }
   
-  export interface INewTransfer {
+//body da requisição
+export interface INewTransfer {
     numberAccountSender: number;
     numberAccountRecived: number;
     valueTransfer: number;

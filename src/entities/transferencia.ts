@@ -1,50 +1,42 @@
-import { v4 as uuidv4 } from 'uuid';
-
-//parametros que a conta usa
-export interface ParamsTransfer{
-  numberAccountSender:number,
-  numberAccountRecived:Number,
-  valueTransfer:number
-  id?:uuidv4;
-  created_at?:Date
-}
-
-export class Transfer{
-  private params:ParamsTransfer;
+import { ITransfer } from "../interfaces/transferInterface";
 
 
-  constructor(attributes:ParamsTransfer){
+export class Transfer implements ITransfer {
+  private params: ITransfer;
+
+  constructor(attributes: ITransfer) {
     this.isValidate(attributes);
     this.params = attributes;
-    this.params.id =uuidv4();
-    console.log("parametros do transfer",this.params)
-   
   }
 
-  get numberAccountSender(){
+  get numberAccountSender() {
     return this.params.numberAccountSender;
   }
 
-  get numberAccountRecived(){
+  get numberAccountRecived() {
     return this.params.numberAccountRecived;
   }
 
-  get valueTransfer(){
+  get valueTransfer() {
     return this.params.valueTransfer;
   }
-   get id(){
+
+  get id() {
     return this.params.id;
-   }
+  }
 
+  get created_at() {
+    return this.params.created_at;
+  }
 
+  isValidate(attributes: ITransfer) {
+    const { numberAccountSender, numberAccountRecived, valueTransfer } =
+      attributes;
 
+    if (!!numberAccountSender && !!numberAccountRecived && !!valueTransfer) {
+      return;
+    }
 
-  isValidate(attributes:ParamsTransfer){
-    const {numberAccountSender,numberAccountRecived,valueTransfer}= attributes;
-        if(!!numberAccountSender && !!numberAccountRecived && !!valueTransfer ){
-          
-          return;
-       }
-         throw new Error('Numero da conta inavlido');
+    throw new Error('Numero da conta inavlido');
   }
 }
