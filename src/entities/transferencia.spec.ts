@@ -7,9 +7,7 @@ describe("testando a entitie Tranferencia",()=>{
     expect(Transfer).toBeDefined();
  })   
     it("Criar uma transferencia ",()=>{
-        
         const request = {
-            
             numberAccountSender:1,
             numberAccountRecived:2,
             valueTransfer:15,
@@ -28,13 +26,13 @@ describe("testando a entitie Tranferencia",()=>{
             created_at: new Date(),
             id: "12s"
         }
-       
-        
        expect(()=>{new Transfer(request)}).toThrow(Error);
-      
     });
-    
-
- 
+    it("Buscar todas as transferencias de uma conta",()=>{
+        const request = {
+            numberAccount: 12342
+        }
+       expect(()=>{new Transfer(request)}).toThrow(Error);
+    });
 })
 

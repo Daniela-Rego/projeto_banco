@@ -1,8 +1,8 @@
 export interface ParamsConta {
-  cliente: string;
-  idade: number;
-  numero_conta: number;
-  saldo: number;
+    cliente: string;
+    idade: number;
+    numero_conta: number;
+    saldo: number;
 }
 
 export class Conta {
