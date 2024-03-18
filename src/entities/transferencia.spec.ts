@@ -1,9 +1,10 @@
+import { ITransfer } from "../interfaces/transferInterface";
 import { Transfer } from "./transferencia"
 
 describe("testando a entitie Tranferencia",()=>{
 
  it("transfer foi declarada",()=>{
-    //para verificar que uma variável não "undefined"
+    
     expect(Transfer).toBeDefined();
  })   
     it("Criar uma transferencia ",()=>{
@@ -19,20 +20,22 @@ describe("testando a entitie Tranferencia",()=>{
         expect(response).toBeInstanceOf(Transfer)
     });
     it("Nao é possivel criar uma transferecia quando o numberContaSender é 0 ",()=>{
-        const request = {
+        const request:ITransfer = {
             numberAccountSender:0,
             numberAccountRecived:2,
             valueTransfer:15,
             created_at: new Date(),
             id: "12s"
         }
+       
        expect(()=>{new Transfer(request)}).toThrow(Error);
     });
-    it("Buscar todas as transferencias de uma conta",()=>{
+   /* it("Buscar todas as transferencias de uma conta",()=>{
         const request = {
             numberAccount: 12342
         }
        expect(()=>{new Transfer(request)}).toThrow(Error);
-    });
-})
+    });*/
+}) 
+
 

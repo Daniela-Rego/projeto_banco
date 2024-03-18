@@ -1,13 +1,14 @@
 import { Transfer } from "../entities/transferencia"
-import { TransferRepository } from "../repository/transferRepository";
-import { ContaRepository } from "../repository/contaRepository";
+import { TransferRepository } from "../interfaces/transferRepositoryInterface";
+import { ContaRepositoryInterface } from "../interfaces/contaRepositoryInterface";
+import { ITransfer } from "../interfaces/transferInterface";
 
 export class RequestTransfer {
-    constructor( public repositoryTransfer: TransferRepository,public repositoryConta: ContaRepository) { }
+    constructor( public repositoryTransfer: TransferRepository,public repositoryConta: ContaRepositoryInterface) { }
 
     
-    async executeTransfer(transfer, saldoSender, saldoRecived): Promise<Transfer> {
-        const transferEncontrada = await this.repositoryTransfer.findById(transfer.params.id);
+    async executeTransfer(transfer:ITransfer, saldoSender:number, saldoRecived:number): Promise<Transfer> {
+        const transferEncontrada = await this.repositoryTransfer.findById(transfer.id);
         
         if(!transferEncontrada){
             throw new Error("Requisição de transferencia nao encontrada")

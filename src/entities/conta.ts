@@ -7,10 +7,9 @@ export interface ParamsConta {
 
 export class Conta {
   private props: ParamsConta;
-  //private saldo: number;
+
 
   constructor(atributos: ParamsConta) {
-    //this.saldo = 1000;
     console.log('entrei class CONTA', atributos);
     this.verificaConta(atributos.numero_conta);
     this.verificarIdade(atributos.idade);
@@ -26,13 +25,7 @@ export class Conta {
   get numero_conta() {
     return this.props.numero_conta;
   }
-  //duvida por que os metodos nao podem ter o mesmo nome que saldo ?
-  /*get retornaSaldo(){
-        return this.saldo;
-    } 
-    set novoSaldo(value:number){
-            this.saldo = value;
-    }*/
+  
 
   get saldo() {
     return this.props.saldo;

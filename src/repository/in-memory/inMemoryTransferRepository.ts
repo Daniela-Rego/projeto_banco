@@ -1,6 +1,6 @@
 import { Transfer } from "../../entities/transferencia";
 import { INewTransfer } from "../../interfaces/transferInterface";
-import { TransferRepository } from "../transferRepository";
+import { TransferRepository } from "../../interfaces/transferRepositoryInterface";
 import { v4 as uuidv4 } from 'uuid';
 
 export class InMemoryTransferRepository implements  TransferRepository {
