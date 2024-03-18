@@ -1,6 +1,6 @@
 import { Transfer } from "../entities/transferencia"
-import { TransferRepository } from "../repository/transferRepository";
-import { ContaRepository } from "../repository/contaRepository";
+import { TransferRepository } from "../interfaces/transferRepositoryInterface";
+import { ContaRepositoryInterface as ContaRepository  } from "../interfaces/contaRepositoryInterface";
 import { RequestTransfer } from "./request-transfer"
 import { INewTransfer } from "../interfaces/transferInterface";
 

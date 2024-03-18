@@ -1,7 +1,7 @@
 import { Conta } from "../../entities/conta";
-import { ContaRepository } from "../contaRepository";
+import { ContaRepositoryInterface } from "../../interfaces/contaRepositoryInterface";
 
-export class ContaRepositoryInMemory implements ContaRepository{
+export class ContaRepositoryInMemory implements ContaRepositoryInterface{
     private contas: Conta[] = [] 
     
      async save(conta: Conta): Promise<void> {
@@ -14,11 +14,11 @@ export class ContaRepositoryInMemory implements ContaRepository{
         console.log("this.contas procurar conta",this.contas)
        
         let contaEncontrada = this.contas.find((item)=> {
-          console.log("nConta no find de contas",item);
+         console.log("nConta no find de contas",item);
          return item.numero_conta == numeroConta
         });
         
-        console.log('contaEncontrada no procurar contas: ',contaEncontrada);
+      console.log('contaEncontrada no procurar contas: ',contaEncontrada);
 
         return contaEncontrada;
      }

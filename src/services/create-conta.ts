@@ -1,22 +1,19 @@
 import { Conta } from "../entities/conta"
-import { ContaRepository } from "../repository/contaRepository";
+import { CreatContaRequest } from "../interfaces/contaInterface";
+import {  ContaRepositoryInterface } from "../interfaces/contaRepositoryInterface";
+
 
 
 /*interface CreatContaRequest{
     cliente: string,
     idade:number,
-    numero_conta:number
-}*/
-
-interface CreatContaRequest{
-    cliente: string,
-    idade:number,
     numero_conta:number,
     saldo:number
-}
+}*/
 type CreatContaResponse = Conta;
 export class CreateConta {
-    constructor( private repository: ContaRepository){}
+    constructor( private repository: ContaRepositoryInterface){}
+   
 
     async execute(contaRequest:CreatContaRequest): Promise<CreatContaResponse>{
         console.log('contaRequest_body',contaRequest);
@@ -28,7 +25,7 @@ export class CreateConta {
         }
        
         await this.repository.save(createConta);
-        console.log('criou conta')
+        console.log('criou conta',createConta)
         return createConta;
 
         
